@@ -13,28 +13,40 @@ import sys
 from datetime import date
 from jinja2 import Environment, FileSystemLoader
 
-yaml_contents = yaml.load(open("cv.yaml", 'r')) #read data
+THIS_FILE=sys.argv[0]
+
+YAML_FILE=sys.argv[1]
+TEMPLATE_FILE=sys.argv[2]
+SECTION_TEMPLATE_FILE=sys.argv[3]
+OP_FILE=sys.argv[4]
+
+yaml_contents = yaml.load(open(YAML_FILE, 'r')) #read data
 
 env = Environment(loader=FileSystemLoader("template"),
   block_start_string='~{',block_end_string='}~',
   variable_start_string='~{{', variable_end_string='}}~')
 
-this_loc = len(open("cv_tex.py", 'r').readlines()) #lets keep it at 42
+this_loc = len(open(THIS_FILE, 'r').readlines()) #lets keep it at 42
 
 def generate():
   body = ""
   for section in yaml_contents['order']: #generate sections 1 by 1
     contents = yaml_contents[section[0]]
     name = section[1].title()
-    body += env.get_template("resume-section.tmpl.tex").render(
+    body += env.get_template(SECTION_TEMPLATE_FILE).render(
       name = name.upper(),
       contents = contents
     )
   #and then generate the TeX wrapper and fill it with generated sections
-  result = open("result/cv.tex", 'w')
-  result.write(env.get_template("resume.tmpl.tex").render(
+  result = open(OP_FILE, 'w')
+  result.write(env.get_template(TEMPLATE_FILE).render(
     name = yaml_contents['name'].upper(),
     email = yaml_contents['email'],
+    title = yaml_contents['title'],
+    phone = yaml_contents['phone'],
+    certification = yaml_contents['certification'],
+    website = yaml_contents['website'],
+    location = yaml_contents['location'],
     loc = this_loc, #lines of code in this very script :)
     body = body,
     today = date.today().strftime("%B %d, %Y") #generation date

@@ -46,13 +46,13 @@ def addEntryField(ARRAY, ARRAY_NAME, ENTRY, ALLOWED_FIELDS, row):
     if not entryField in ALLOWED_FIELDS:
         die("disAllowed field '{}' for '{}' allowed[{}]".format(entryField, ARRAY_NAME, ALLOWED_FIELDS))
  
-    if entryField == 'ITEMLIST':
-        if not 'ITEMLIST' in ENTRY:
-            ENTRY['ITEMLIST'] = [ ]
+    if entryField == 'LISTITEM':
+        if not 'LISTITEM' in ENTRY:
+            ENTRY['LISTITEM'] = [ ]
             
-        ENTRY['ITEMLIST'].append(row[3])
-        #debug("Appending ITEMLIST <{}>".format(row[3]))
-        #debug("Now ITEMLIST has length <{}>".format(len(ENTRY['ITEMLIST'])))
+        ENTRY['LISTITEM'].append(row[3])
+        #debug("Appending LISTITEM <{}>".format(row[3]))
+        #debug("Now LISTITEM has length <{}>".format(len(ENTRY['LISTITEM'])))
         #die("X")
     else:
         ENTRY[entryField] = row[3]
@@ -118,22 +118,18 @@ def processCsvFile(reader):
                 debug("Error in line {} <{}>".format(lno, str(row)))
                 die("X")
 
-# TODO: check for SUBSECTIONS each with TITLE, START, END, ITEMLIST
-# TODO: IMPLEMENT SECTION: SKILLS
-# TODO: IMPLEMENT SECTION: EDUCATION
-# TODO: IMPLEMENT SECTION: ACTIVITIES
 
         if SECTION == "EXPERIENCE":
-            addEntryField(EXPERIENCES, 'EXPERIENCE', ENTRY, ['TITLE', 'EMPLOYER', 'ROLE', 'START', 'END', 'ITEMLIST'], row)
+            addEntryField(EXPERIENCES, 'EXPERIENCE', ENTRY, ['TITLE', 'EMPLOYER', 'ROLE', 'START', 'END', 'LISTITEM'], row)
         if SECTION == "SKILLS":
-            addEntryField(SKILLS,      'SKILLS',     ENTRY, ['TITLE', 'ITEMLIST'], row)
+            addEntryField(SKILLS,      'SKILLS',     ENTRY, ['TITLE', 'LISTITEM'], row)
         if SECTION == "EDUCATION":
-            addEntryField(EDUCATION,   'EDUCATION',  ENTRY, ['TITLE', 'SCHOOL', 'START', 'END', 'ITEMLIST'], row)
+            addEntryField(EDUCATION,   'EDUCATION',  ENTRY, ['TITLE', 'SCHOOL', 'START', 'END', 'LISTITEM'], row)
         if SECTION == "ACTIVITIES":
-            addEntryField(ACTIVITIES,  'ACTIVITIES', ENTRY, ['TITLE', 'ITEMLIST'], row)
+            addEntryField(ACTIVITIES,  'ACTIVITIES', ENTRY, ['TITLE', 'LISTITEM'], row)
 
     endrow = [ 'SUBSECTION', '', '' ]
-    addEntryField(ACTIVITIES,  'ACTIVITIES', ENTRY, ['ITEMLIST'], endrow)
+    addEntryField(ACTIVITIES,  'ACTIVITIES', ENTRY, ['LISTITEM'], endrow)
 
     debug("Read {} {} entries".format(len(VAR.keys()),  'VARIABLE'))
     debug("Read {} {} entries".format(len(EXPERIENCES), 'EXPERIENCE'))
@@ -151,7 +147,7 @@ def processCsvFile(reader):
         debug("EDUCATION {}".format(edu['TITLE']))
     for act in ACTIVITIES:
         debug("ACTIVITIES {}".format(act['TITLE']))
-    #for item in ACTIVITIES[0]['ITEMLIST']:
+    #for item in ACTIVITIES[0]['LISTITEM']:
     #    debug("ITEM[]={}".format(item))
     return (VAR, EXPERIENCES, SKILLS, EDUCATION, ACTIVITIES)
 
@@ -160,8 +156,13 @@ def writeCVYaml(opfile, VAR, EXPERIENCES, SKILLS, EDUCATION, ACTIVITIES):
     
     f.write('name: {}\n'.format(VAR['NAME']))
     f.write('email: {}\n'.format(VAR['EMAIL']))
+    f.write('title: {}\n'.format(VAR['TITLE']))
+    f.write('phone: {}\n'.format(VAR['PHONE']))
+    f.write('certification: {}\n'.format(VAR['CERTIFICATION']))
+    f.write('website: {}\n'.format(VAR['WEBSITE']))
+    f.write('location: {}\n'.format(VAR['LOCATION']))
     f.write('\n')
-    
+
     f.write('order:\n')
     #f.write('- [life_education, LIFE / EDUCATION]\n')
     f.write('- [industry, WORK EXPERIENCE]\n')
@@ -181,7 +182,7 @@ def writeCVYaml(opfile, VAR, EXPERIENCES, SKILLS, EDUCATION, ACTIVITIES):
         f.write("    title: " + EXPERIENCE['TITLE'] + "\n")
         f.write("    dates: " + EXPERIENCE['START'] + ", " + EXPERIENCE['END'] + "\n")
         f.write("    details:\n")
-        for item in EXPERIENCE['ITEMLIST']:
+        for item in EXPERIENCE['LISTITEM']:
             f.write("      - " + item + "\n")
         #  - place: nCube, Ravelin, Murat Diril etc.
         #location: London, UK
@@ -195,7 +196,7 @@ def writeCVYaml(opfile, VAR, EXPERIENCES, SKILLS, EDUCATION, ACTIVITIES):
     for SKILL in SKILLS:
         f.write("  - title: " + SKILL['TITLE'] + "\n")
         f.write("    details:\n")
-        for item in SKILL['ITEMLIST']:
+        for item in SKILL['LISTITEM']:
             f.write("      - " + item + "\n")
         #    - title: Languages of choice
         #      details: JavaScript, PHP, Python
@@ -207,14 +208,14 @@ def writeCVYaml(opfile, VAR, EXPERIENCES, SKILLS, EDUCATION, ACTIVITIES):
 
         f.write("    dates: " + EDU['START'] + ", " + EDU['END'] + "\n")
         f.write("    details:\n")
-        for item in EDU['ITEMLIST']:
+        for item in EDU['LISTITEM']:
             f.write("      - " + item + "\n")
         
     f.write('activities:\n')
     for ACTIVITY in ACTIVITIES:
         f.write("  - title: " + ACTIVITY['TITLE'] + "\n")
         f.write("    details:\n")
-        for item in ACTIVITY['ITEMLIST']:
+        for item in ACTIVITY['LISTITEM']:
             f.write("      - " + item + "\n")
         
 

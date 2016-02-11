@@ -102,10 +102,40 @@
 ~{ elif name == "SKILLS" }~
   \begin{tabular}{ @{} p{32mm} p{135mm} @{} }
   ~{ for skill in contents }~
-    \bf\small ~{{ skill.title }}~ & {\small ~{{ skill.details }}~} \\
+    \bf\small ~{{ skill.title }}~ & {\small
+    ~{ for detail in skill.details }~
+        ~{{ detail }}~
+    ~{ endfor }~
+    } \\
   ~{ endfor }~
   \end{tabular}
   \vspace{10mm}
+
+~{ elif name == "EDUCATION" }~
+  \begin{tabular}{ @{} p{32mm} p{135mm} @{} }
+  ~{ for school in contents }~
+    \bf\small ~{{ school.place }}~ & {\small
+    ~{{ school.title }}~
+    ~{ for detail in school.details }~
+        ~{{ detail }}~
+    ~{ endfor }~
+    } \\
+  ~{ endfor }~
+  \end{tabular}
+  \vspace{10mm}
+
+~{ elif name == "ACTIVITIES" }~
+  \begin{tabular}{ @{} p{32mm} p{135mm} @{} }
+  ~{ for activity in contents }~
+    \bf\small ~{{ activity.title }}~ & {\small
+    ~{ for detail in activity.details }~
+        ~{{ detail }}~
+    ~{ endfor }~
+    } \\
+  ~{ endfor }~
+  \end{tabular}
+  \vspace{10mm}
+
 ~{ else }~
   ~{{ contents }}~
   \bigskip
