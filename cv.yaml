@@ -91,9 +91,11 @@ education:
       - Walter Firth prize for electronics
       - 1 year placement with BBC Research Labs
 activities:
-  - title: Technology
+  - title: Sport / Dance
     details:
       - Running, cycling, Roller blading
       - Rock, Argentinian Tango, Salsa, Music, Cinema
+  - title: Technology
+    details:
       - User Groups - GUILDE (Linux), AFPY (Python), Docker, AlpesJUG (Java)
       - Creation of Grenoble Python User Group

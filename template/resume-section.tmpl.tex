@@ -32,8 +32,7 @@
 ~{ elif name == "WORK EXPERIENCE" }~
   ~{ for experience in contents }~
     \begin{tabular}{ @{} p{32mm} p{135mm} @{} }
-    & \small ~{{ experience.place }}~ ~{- if experience.location -}~ \small \hspace{1mm}- ~{{ experience.location }}~~{- endif -}~\\
-    \small ~{{ experience.dates }}~ & \bf\small ~{{ experience.title }}~ ~{- if experience.languages -}~\small\hspace{1mm}\bf\color{maincolor}(~{{ experience.languages }}~)~{- endif -}~\\
+    \small ~{{ experience.dates }}~ & \bf\small ~{{ experience.title }}~, ~{{ experience.place }}~ ~{- if experience.languages -}~\small\hspace{1mm}\bf\color{maincolor}(~{{ experience.languages }}~)~{- endif -}~\\
     ~{- if experience.details -}~
       ~{ for detail in experience.details }~
         & $\cdot$ \small ~{{ detail }}~ \\
