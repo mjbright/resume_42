@@ -1,6 +1,7 @@
 #!/bin/bash
 
-pdflatex=/c/Progs/texlive/2015/bin/win32/pdflatex.exe
+#pdflatex=/c/Progs/texlive/2015/bin/win32/pdflatex.exe
+pdflatex=/usr/bin/pdflatex
 
 # By default: use CV.xlsx in local directory
 MYCV_XL=CV.xlsx

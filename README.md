@@ -1,3 +1,13 @@
+XSLX to CSV to YAML to PDF Resume Generator
+===========================================
+
+This tool takes a worksheet "CV" from an Excel document and extracts it
+to a CSV file.
+
+Install texlive, to provide pdflatex:
+    sudo apt-get install texlive
+    sudo apt-get install texlive-latex-extras
+
 YAML to PDF Resume Generator
 ============================
 

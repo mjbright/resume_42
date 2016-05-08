@@ -1,7 +1,7 @@
 name: Michael Bright
 email: cv@mjbright.net
-title: NFV Solution Architect
-phone: +33 (0)67299 1647
+title: NFV Solution Architect, Containers
+phone: +33 (0)672991647
 certification: RHCE, RHCSA, HP Expert One SDN Apps
 website: http://mjbright.github.io
 location: Grenoble, France
@@ -18,7 +18,8 @@ industry:
     dates: 09/2013, Present
     details:
       - NFV PoC setup with HPE and NFV partners
-      - Hands-on with Helion Carrier-Grade OpenStack, Docker, OpenStack bug fix
+      - Hands-on with Helion Carrier-Grade OpenStack,  OpenStack bug fix
+      - Docker evangelism via presentations and labs
   - place: HP CMS - Grenoble France
     title: Cloud Engineer
     dates: 09/2005, 09/2013
@@ -67,15 +68,15 @@ industry:
     details:
       - Z-filter design, simulation, bit-slice micro-processor coding and user subjectivity tests of NICAM digital audio subjective noise reduction.
 skills:
+  - title: Cloud
+    details:
+      - PaaS: Google App Engine, OpenShift, Heroku
+      - IaaS: OpenStack, CloudStack, SDN (OpenDaylight), Docker
   - title: Languages and Paradigms
     details:
       - Scripting languages (Python/Perl/Ruby/PHP), C++/C, Java, Scala, JavaScript, JQuery, FP
       - SQL, NoSQL (MongoDB, Couchbase), Map Reduce. Ruby on Rails, Django
       - Embedded Linux Kernel, Android, Raspberry Pi, BeagleBone
-  - title: Cloud
-    details:
-      - PaaS: Google App Engine, OpenShift, Heroku
-      - IaaS: OpenStack, CloudStack, SDN (OpenDaylight), Docker
   - title: Tools
     details:
       - Eclipse, Git, svn, vim, maven, Jenkins, gdb
@@ -97,5 +98,5 @@ activities:
       - Rock, Argentinian Tango, Salsa, Music, Cinema
   - title: Technology
     details:
-      - User Groups - GUILDE (Linux), AFPY (Python), Docker, AlpesJUG (Java)
       - Creation of Grenoble Python User Group
+      - User Groups - Docker, GUILDE (Linux), AFPY (Python), AlpesJUG (Java)
