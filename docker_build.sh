@@ -1,3 +1,4 @@
+#!/bin/bash
 
 die() {
     echo "$0: die - $*" >&2
@@ -5,12 +6,18 @@ die() {
 }
 
 echo; echo "---- build image: ----"
-docker build -t mjbright/cv_resume_42 .  || die "Build failed"
+CMD="docker build -t mjbright/cv_resume_42 ."
+echo $CMD
+$CMD || die "Build failed"
 
 echo; echo "---- login to DockerHub ----"
-docker login -u mjbright || die "Login failed"
+CMD="docker login -u mjbright"
+echo $CMD
+$CMD || die "Login failed"
 
 echo; echo "---- push new image to DockerHub ----"
-docker push mjbright/cv_resume_42 
+CMD="docker push mjbright/cv_resume_42 "
+echo $CMD
+$CMD
 
 
