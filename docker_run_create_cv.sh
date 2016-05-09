@@ -5,7 +5,9 @@ die() {
     exit 1
 }
 
-cd ~/src/git/mjbright-resume_42
+IMAGE=mjbright/cv_resume_42
+#IMAGE=mjbright/slim_cv_resume_42
+cd ~/src/git/mjbright-resume42
 
 YEAR=$(date +%Y)
 
@@ -20,11 +22,18 @@ XLSX=""
 [ ! -z "$1" ] && {
     XLSX=$1
     XLSX_DIR=${XLSX%/*}
+    [ "$XLSX_DIR" = "$XLSX" ] && XLSX_DIR=.
+    #die "XLSX_DIR=$XLSX_DIR"
 }
 
 [ -z "$XLSX" ] && die "No Excel file specified/found"
 
 [ ! -f $XLSX ] && die "No such Excel file as <<$XLSX>>"
+
+# Need absolute PATH in volume path:
+[ "$XLSX_DIR" = "." ] && XLSX_DIR=$PWD
+XLSX_DIR=$(echo $XLSX_DIR | sed 's/\/\.\.\//\/$PWD\//')
+#die "Using <<$XLSX_DIR>> as dir"
 
 echo "Using <<$XLSX>> as input"
 
@@ -33,7 +42,10 @@ xlsx_dir=/xlsx_dir
 xlsx=$xlsx_dir/${XLSX##*/}
 
 #docker run --rm -it -v $PWD:/cv mjbright/cv_resume_42 bash
-docker run --rm -it -v $XLSX_DIR:/xlsx_dir -v $PWD:/cv mjbright/cv_resume_42 /cv/create_cv.sh -xl $xlsx
+CMD="docker run --rm -it -v $XLSX_DIR:/xlsx_dir -v $PWD:/cv $IMAGE /cv/create_cv.sh -xl $xlsx"
+echo $CMD
+$CMD
+#docker run --rm -it -v $XLSX_DIR:/xlsx_dir -v $PWD:/cv $IMAGE /cv/create_cv.sh -xl $xlsx
 
 ls -al -tr result/*.pdf | tail -2
 
