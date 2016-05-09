@@ -9,5 +9,7 @@
 ## MYCV_XL="${PLANNING_DIR}/${MONTH}.xlsx"
 MYCV_XL=/vagrant/CV.xlsx
 
+[ ! -z "$1" ] && MYCV_XL=$1
+
 ./create_cv.sh -xl $MYCV_XL
 
