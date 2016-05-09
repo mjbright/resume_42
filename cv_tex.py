@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # Converts my Resume from YAML to TeX.
 # Just don't forget to drop pdflatex on the output :)
