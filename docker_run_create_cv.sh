@@ -18,6 +18,12 @@ XLSX=""
     XLSX=$(ls -tr $XLSX_DIR/*.xlsx | grep $YEAR | tail -1)
 }
 
+EXECUTE=1
+[ ! -z "$1" ] && [ "$1" = "-n" ] && {
+    EXECUTE=0
+    shift
+}
+
 # Must be in local dir:
 [ ! -z "$1" ] && {
     XLSX=$1
@@ -43,9 +49,15 @@ xlsx=$xlsx_dir/${XLSX##*/}
 
 #docker run --rm -it -v $PWD:/cv mjbright/cv_resume_42 bash
 CMD="docker run --rm -it -v $XLSX_DIR:/xlsx_dir -v $PWD:/cv $IMAGE /cv/create_cv.sh -xl $xlsx"
-echo $CMD
-$CMD
-#docker run --rm -it -v $XLSX_DIR:/xlsx_dir -v $PWD:/cv $IMAGE /cv/create_cv.sh -xl $xlsx
+echo; echo;
 
-ls -al -tr result/*.pdf | tail -2
+[ $EXECUTE -ne 0 ] && {
+    echo $CMD
+    $CMD;
+    #docker run --rm -it -v $XLSX_DIR:/xlsx_dir -v $PWD:/cv $IMAGE /cv/create_cv.sh -xl $xlsx
+    ls -al -tr result/*.pdf | tail -2;
+} || {
+    echo "NOT RUN:"
+    echo "    "$CMD
+}
 
