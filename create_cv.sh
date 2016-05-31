@@ -77,6 +77,8 @@ res=$?
 ls -altr $PWD/${BASE}.pdf
 [ $res -ne 0 ] && die "Failed to create pdf file"
 
+cp -a $PWD/${BASE}.pdf $PWD/cv.pdf
+
 
 
 
