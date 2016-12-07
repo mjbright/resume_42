@@ -127,9 +127,11 @@
   \begin{tabular}{ @{} p{32mm} p{135mm} @{} }
   ~{ for activity in contents }~
     \bf\small ~{{ activity.title }}~ & {\small
-    ~{ for detail in activity.details }~
-        ~{{ detail }}~
-    ~{ endfor }~
+    ~{ if activity.details }~
+        ~{ for detail in activity.details }~
+            ~{{ detail }}~
+        ~{ endfor }~
+    ~{ endif }~
     } \\
   ~{ endfor }~
   \end{tabular}
