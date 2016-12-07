@@ -215,8 +215,9 @@ def writeCVYaml(opfile, VAR, EXPERIENCES, SKILLS, EDUCATION, ACTIVITIES):
     for ACTIVITY in ACTIVITIES:
         f.write("  - title: " + ACTIVITY['TITLE'] + "\n")
         f.write("    details:\n")
-        for item in ACTIVITY['LISTITEM']:
-            f.write("      - " + item + "\n")
+        if 'LISTITEM' in ACTIVITY:
+            for item in ACTIVITY['LISTITEM']:
+                f.write("      - " + item + "\n")
         
 
 with open(csvfile, 'r') as f:

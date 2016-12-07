@@ -1,10 +1,10 @@
-name: Michael Bright
-email: cv@mjbright.net
-title: NFV Solution Architect, Containers
-phone: +33 (0)672991647
-certification: RHCE, RHCSA, HP Expert One SDN Apps
-website: http://mjbright.github.io
-location: Grenoble, France
+name: Example Owner
+email: email@gmail.com
+title: Solution Architect
+phone: +33 (0)67299 xxxx
+certification: Certification1, Certification2
+website: http://myhome.github.io
+location: Qqpart, France
 
 order:
 - [industry, WORK EXPERIENCE]
@@ -13,90 +13,60 @@ order:
 - [activities, ACTIVITIES]
 
 industry:
-  - place: HPE EG presales - Grenoble France
-    title: NFV Solution Architect
+  - place: ACME Corp, France
+    title: Solution Architect
     dates: 09/2013, Present
     details:
-      - NFV PoC setup with HPE and NFV partners
-      - Hands-on with Helion Carrier-Grade OpenStack,  OpenStack bug fix
-      - Docker evangelism via presentations and labs
-  - place: HP CMS - Grenoble France
+      - Packing boxes
+      - Unpacking boxes
+  - place: ACME Corp, Belgium
     title: Cloud Engineer
     dates: 09/2005, 09/2013
     details:
-      - EU patent for Prepaid data charging:  EP1720335A1
-      - Automated installations of  AP4SaaS/IaaS cloud products for Telecom service providers
-      - --  Successful transfer to India/China development teams
-      - --  Installation in HP Cloud (OpenStack)
-      - Automated test frameworks for IaaS cloud product
-      - --  SOAP/PHP, Python/PySphere(vSphere control), Perl, JUnit, Jmeter
-      - Agile development of Data analytics and service profile platforms
-      - --  Agile team (SCRUM/Continuous Integration using Git/Maven/Eclipse/Java)
-      - --  Software development, unit and functional tests for SOAP and REST frameworks.
-      - Proposed/implemented automated VideoXML dialog creation from PPT for MWC PoC.
-      - MOOCs in the areas of BigData, Software Defined Networks, Databases, Agile
-  - place: HP OCBU - Grenoble France
+      - EU patent for box packing:  EP1720335A1
+      - Packing boxes
+      - Unpacking boxes
+  - place: ACME Corp, UK
     title: Solution Architect/Consultant
     dates: 02/1998, 09/2005
     details:
-      - Pre-sales technical consulting on OpenCall products and proof of concepts
-      - --  Prepaid voice/data charging, Voice over IP, IN, NextGen service delivery: OSA/Parlay.
-      - Customer/Partner contact and ITSM delivery
-      - --  Performance benchtesting, design win prototyping, PoCs, RFP responses
-      - --  Deployments: KT VoIP benchtest, Tuka IN, DCC Prepaid, FT VHE.
-      - --  ITSE Workshop delivery (Bouygues prepaid, Polkomtel)
-      - --  Technical Lead for HKTel Y2K migration,
-  - place: HP OCBU - Grenoble France
-    title: Tech Lead/Software Engineer
-    dates: 05/1992, 02/1998
-    details:
-      - Technical Lead on Telecom IN products
-      - --  Service Creation Environment project (IN SCE), 3rd-party editor integration
-      - --  Consulting, debug, training to 8-partner billing project for HDLC/X.25 networks
-      - Software Engineer
-      - --  Design and implementation of SCE and SLEE modules (HA, Mib, MemoryHandler).
-      - --  Port of HP-UX 802.3 LAN driver to HP-RT.
-  - place: HP Research Labs - Bristol UK
+      - EU patent for box unpacking:  EP1720335A2
+      - Packing boxes
+      - Unpacking boxes
+  - place: ACME Research Labs - Bristol UK
     title: Member of Technical Staff
     dates: 08/1985, 05/1992
     details:
-      - Research into design and modeling of data/signalling networks (X.25, SS7, ethernet)  leading to PoC demos and HP products 
-      - Parallel Processing research, AI/Qualitative reasoning
-  - place: BBC Research Labs - UK
-    title: Research Trainee
-    dates: 09/1983, 08/1984
-    details:
-      - Z-filter design, simulation, bit-slice micro-processor coding and user subjectivity tests of NICAM digital audio subjective noise reduction.
+      - Research into box packing
+      - Research into box unpacking
 skills:
-  - title: Cloud
+  - title: Box types
     details:
-      - PaaS: Google App Engine, OpenShift, Heroku
-      - IaaS: OpenStack, CloudStack, SDN (OpenDaylight), Docker
-  - title: Languages and Paradigms
+      - Cardboard
+      - Folding plastics
+      - Selophane
+  - title: Box colors
     details:
-      - Scripting languages (Python/Perl/Ruby/PHP), C++/C, Java, Scala, JavaScript, JQuery, FP
-      - SQL, NoSQL (MongoDB, Couchbase), Map Reduce. Ruby on Rails, Django
-      - Embedded Linux Kernel, Android, Raspberry Pi, BeagleBone
+      - Blue
+      - 50 shades of red
   - title: Tools
     details:
-      - Eclipse, Git, svn, vim, maven, Jenkins, gdb
-      - Virtualization (vSphere/PySphere, KVM-Qemu, VirtualBox)
+      - Scissors
+      - Selotape
   - title: Foreign Languages
     details:
       - Fluency in French, basic fluency in Italian, Spanish.
 education:
-  - title: B.Sc/Dip.Eng in  Electronic Control and Robotics
+  - title: B.Sc/Dip.Eng in Making Boxes
   - place: Univ. Of Hull,  UK
     dates: 10/1980, 07/1985
     details:
-      - Walter Firth prize for electronics
-      - 1 year placement with BBC Research Labs
+      - Walter Firth prize for box packing
+      - 1 year placement with ACME Research Labs
 activities:
-  - title: Sport / Dance
+  - title: Technology
     details:
       - Running, cycling, Roller blading
       - Rock, Argentinian Tango, Salsa, Music, Cinema
-  - title: Technology
-    details:
-      - Creation of Grenoble Python User Group
-      - User Groups - Docker, GUILDE (Linux), AFPY (Python), AlpesJUG (Java)
+      - Docker
+      - Python

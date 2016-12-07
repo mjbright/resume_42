@@ -1,5 +1,11 @@
 #!/bin/bash
 
+set -x
+
+tree /scripts/
+
+tree /cv/
+
 #pdflatex=/c/Progs/texlive/2015/bin/win32/pdflatex.exe
 pdflatex=/usr/bin/pdflatex
 
@@ -54,16 +60,20 @@ ls -altr cv.yaml
 
 ## Create LATEX file from YAML:
 echo; echo "-- Creating latex from yaml file"
-./cv_tex.py cv.yaml resume.tmpl.tex resume-section.tmpl.tex result/cv.tex
+ls -altr /cv/template/
+#ARGS="cv.yaml /cv/template/resume.tmpl.tex /cv/template/resume-section.tmpl.tex /cv/result/cv.tex"
+ARGS="cv.yaml resume.tmpl.tex resume-section.tmpl.tex /cv/result/cv.tex"
+ls -altr $ARGS
+./cv_tex.py $ARGS
 res=$?
 
-ls -altr result/cv.tex
+ls -altr /cv/result/cv.tex
 [ $res -ne 0 ] && die "Failed to create latex file"
 
 
 ## Create PDF file from LATEX:
 echo; echo "-- Creating pdf from latex file"
-cd result
+cd /cv/result
 [ -f ./cv.pdf ] && mv -v ./cv.pdf ./cv.old.pdf
 
 DT=$(date +'%G-%m-%d_%Hh%Mm')
