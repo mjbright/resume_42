@@ -18,3 +18,12 @@ RUN apt-get install -y python3
 # Install Python3 modules for reading xlsx files, handling yaml, templates:
 RUN apt-get install -y python3-xlrd python3-yaml python3-jinja2
 
+RUN apt-get install -y tree
+
+#### # Install pdflatex
+#### RUN apt-get install -y pdflatex
+
+RUN mkdir /scripts
+ADD scripts/create_cv.sh scripts/csv2yaml.py scripts/cv_tex.py scripts/xsl2csv.py /scripts/
+
+
