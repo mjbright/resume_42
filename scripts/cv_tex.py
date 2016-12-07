@@ -22,7 +22,8 @@ OP_FILE=sys.argv[4]
 
 yaml_contents = yaml.load(open(YAML_FILE, 'r')) #read data
 
-env = Environment(loader=FileSystemLoader("template"),
+#env = Environment(loader=FileSystemLoader("template"),
+env = Environment(loader=FileSystemLoader("/cv/template"),
   block_start_string='~{',block_end_string='}~',
   variable_start_string='~{{', variable_end_string='}}~')
 
