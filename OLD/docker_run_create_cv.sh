@@ -7,7 +7,10 @@ die() {
 
 IMAGE=mjbright/cv_resume_42
 #IMAGE=mjbright/slim_cv_resume_42
-cd ~/src/git/mjbright-resume42
+
+REPO_DIR=${PWD%/*} 
+#cd ~/src/git/mjbright-resume42
+cd $REPO_DIR
 
 YEAR=$(date +%Y)
 
