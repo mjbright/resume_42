@@ -2,8 +2,11 @@
 
 set -x
 
+ls -altr /
+
 tree /scripts/
 
+ls -altr /cv/
 tree /cv/
 
 #pdflatex=/c/Progs/texlive/2015/bin/win32/pdflatex.exe
