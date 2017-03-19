@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# ./docker_build.sh --no-cache
+
 die() {
     echo "$0: die - $*" >&2
     exit 1
@@ -13,7 +15,7 @@ DOCKERHUB_USER=mjbright
 
 echo; echo "---- build image: ----"
 #CMD="docker build -t $IMAGE_TAG ."
-CMD="docker build -f $DOCKERFILE -t $IMAGE_TAG ."
+CMD="docker build $* -f $DOCKERFILE -t $IMAGE_TAG ."
 echo $CMD
 $CMD || die "Build failed"
 
