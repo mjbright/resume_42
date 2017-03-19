@@ -43,6 +43,11 @@ def addEntryField(ARRAY, ARRAY_NAME, ENTRY, ALLOWED_FIELDS, row):
         return
           
     entryField = row[2]
+
+    # Ignore entry if #<field> e.g. #LISTITEM:
+    if entryField[0] == '#':
+        return
+
     if not entryField in ALLOWED_FIELDS:
         die("disAllowed field '{}' for '{}' allowed[{}]".format(entryField, ARRAY_NAME, ALLOWED_FIELDS))
  
