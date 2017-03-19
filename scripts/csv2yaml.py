@@ -153,6 +153,9 @@ def processCsvFile(reader):
 
 def writeCVYaml(opfile, VAR, EXPERIENCES, SKILLS, EDUCATION, ACTIVITIES):
     f = open(opfile, 'w')
+
+    LISTITEM_DELIMITER="    - "
+    #LISTITEM_DELIMITER="    "
     
     f.write('name: {}\n'.format(VAR['NAME']))
     f.write('email: {}\n'.format(VAR['EMAIL']))
@@ -183,7 +186,7 @@ def writeCVYaml(opfile, VAR, EXPERIENCES, SKILLS, EDUCATION, ACTIVITIES):
         f.write("    dates: " + EXPERIENCE['START'] + ", " + EXPERIENCE['END'] + "\n")
         f.write("    details:\n")
         for item in EXPERIENCE['LISTITEM']:
-            f.write("      - " + item + "\n")
+            f.write(LISTITEM_DELIMITER + item + "\n")
         #  - place: nCube, Ravelin, Murat Diril etc.
         #location: London, UK
         #title: 'Freelancer as a Developer / Designer'
@@ -197,7 +200,7 @@ def writeCVYaml(opfile, VAR, EXPERIENCES, SKILLS, EDUCATION, ACTIVITIES):
         f.write("  - title: " + SKILL['TITLE'] + "\n")
         f.write("    details:\n")
         for item in SKILL['LISTITEM']:
-            f.write("      - " + item + "\n")
+            f.write(LISTITEM_DELIMITER + item + "\n")
         #    - title: Languages of choice
         #      details: JavaScript, PHP, Python
 
@@ -209,7 +212,7 @@ def writeCVYaml(opfile, VAR, EXPERIENCES, SKILLS, EDUCATION, ACTIVITIES):
         f.write("    dates: " + EDU['START'] + ", " + EDU['END'] + "\n")
         f.write("    details:\n")
         for item in EDU['LISTITEM']:
-            f.write("      - " + item + "\n")
+            f.write(LISTITEM_DELIMITER + item + "\n")
         
     f.write('activities:\n')
     for ACTIVITY in ACTIVITIES:
@@ -217,7 +220,7 @@ def writeCVYaml(opfile, VAR, EXPERIENCES, SKILLS, EDUCATION, ACTIVITIES):
         f.write("    details:\n")
         if 'LISTITEM' in ACTIVITY:
             for item in ACTIVITY['LISTITEM']:
-                f.write("      - " + item + "\n")
+                f.write(LISTITEM_DELIMITER + item + "\n")
         
 
 with open(csvfile, 'r') as f:
