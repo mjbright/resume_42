@@ -35,7 +35,11 @@
     \small ~{{ experience.dates }}~ & \bf\small ~{{ experience.title }}~, ~{{ experience.place }}~ ~{- if experience.languages -}~\small\hspace{1mm}\bf\color{maincolor}(~{{ experience.languages }}~)~{- endif -}~\\
     ~{- if experience.details -}~
       ~{ for detail in experience.details }~
-        & $ $ \small ~{{ detail }}~ \\
+        ~{- if "--" in detail -}~
+	    & $ \hspace{5mm} $ \small ~{{ detail }}~ \\
+        ~{- else  -}~
+            & $ $ \small ~{{ detail }}~ \\
+        ~{- endif -}~
       ~{ endfor }~
     ~{- endif -}~
     \end{tabular}
