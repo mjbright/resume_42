@@ -25,5 +25,10 @@ RUN apt-get install -y tree
 
 RUN mkdir /scripts
 ADD scripts/create_cv.sh scripts/csv2yaml.py scripts/cv_tex.py scripts/xsl2csv.py /scripts/
+RUN chmod a+x /scripts/*
+RUN ls -altr /scripts/*
+
+CMD /script/create_cv.sh
+
 
 
