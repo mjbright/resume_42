@@ -12,7 +12,11 @@ die() {
 }
 
 INPUT_XLSX="CV.xlsx"
+WWW_CV_XLSX="$HOME/z/www/mjbright.github.io/static/docs/src/CV.xlsx"
+
 if [ ! -z "$1" ];then
+    [ "$1" = "-www" ] && set -- $WWW_CV_XLSX
+
     [ ! -f "$1" ] && die "No such file <$1>"
 
     cp -a "$1" CV_mine.xlsx
@@ -23,4 +27,7 @@ CMD="docker run --rm -it $CHEAT -v $GITDIR:/cv mjbright/cv_resume_42 bash /scrip
 
 echo $CMD
 $CMD 2>&1 | tee TEST.sh.log
+
+echo "logfile:"
+ls -altr TEST.sh.log
 
