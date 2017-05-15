@@ -1,6 +1,7 @@
 #!/bin/bash
 
-set -x
+[ "$1" = "-x" ] && { set -x; shift; }
+# set -x
 
 ls -altr /
 
@@ -46,33 +47,42 @@ done
 
 cd ${0%/*}
 
+CSV=/cv/result/cv.csv
+YAML=/cv/result/cv.yml
+
+function run_cmd {
+    CMD="$*"
+
+    echo "[$PWD] $CMD"
+    $CMD
+    res=$?
+    #[ $res -ne 0 ] && die "Failed to create csv file"
+    #[ $res -ne 0 ] && die "Failed last step"
+}
+
 ## Check $MYCV_XL file exists:
 [ ! -f $MYCV_XL ] && die "No such Excel file: '$MYCV_XL'"
 
 ## Create CSV file from XL:
 echo; echo "-- Creating csv from xlsx file [$MYCV_XL - Worksheet 'CV']"
-./xsl2csv.py $MYCV_XL CV op.csv
+run_cmd "./xsl2csv.py $MYCV_XL CV $CSV"
+[ $res -ne 0 ] && die "Failed to create csv file"
 
 ## Create YAML file from CSV:
 echo; echo "-- Creating yaml from csv file"
-./csv2yaml.py op.csv cv.yaml
-res=$?
-
-ls -altr cv.yaml
+run_cmd "./csv2yaml.py $CSV $YAML"
+ls -altr $CSV $YAML
 [ $res -ne 0 ] && die "Failed to create yaml file"
 
 ## Create LATEX file from YAML:
 echo; echo "-- Creating latex from yaml file"
 ls -altr /cv/template/
-#ARGS="cv.yaml /cv/template/resume.tmpl.tex /cv/template/resume-section.tmpl.tex /cv/result/cv.tex"
-ARGS="cv.yaml resume.tmpl.tex resume-section.tmpl.tex /cv/result/cv.tex"
+#ARGS="$YAML /cv/template/resume.tmpl.tex /cv/template/resume-section.tmpl.tex /cv/result/cv.tex"
+ARGS="$YAML resume.tmpl.tex resume-section.tmpl.tex /cv/result/cv.tex"
 ls -altr $ARGS
-./cv_tex.py $ARGS
-res=$?
-
+run_cmd "./cv_tex.py $ARGS"
 ls -altr /cv/result/cv.tex
-[ $res -ne 0 ] && die "Failed to create latex file"
-
+[ $res -ne 0 ] && die "Failed to create tex file"
 
 ## Create PDF file from LATEX:
 echo; echo "-- Creating pdf from latex file"
@@ -84,13 +94,13 @@ DT=$(date +'%G-%m-%d_%Hh%Mm')
 BASE=cv_${DT}
 cp cv.tex ${BASE}.tex
 
-$pdflatex ${BASE} 
-res=$?
-
+run_cmd "$pdflatex ${BASE} "
 ls -altr $PWD/${BASE}.pdf
 [ $res -ne 0 ] && die "Failed to create pdf file"
 
-cp -a $PWD/${BASE}.pdf $PWD/cv.pdf
+run_cmd "cp -a $PWD/${BASE}.pdf $PWD/cv.pdf"
+echo "$CMD"
+$CMD
 
 
 

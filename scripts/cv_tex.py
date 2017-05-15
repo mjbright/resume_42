@@ -47,6 +47,8 @@ def generate():
     phone = yaml_contents['phone'],
     certification = yaml_contents['certification'],
     website = yaml_contents['website'],
+    goal = yaml_contents['goal'],
+    linkedin = yaml_contents['linkedin'],
     location = yaml_contents['location'],
     loc = this_loc, #lines of code in this very script :)
     body = body,

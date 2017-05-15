@@ -168,7 +168,9 @@ def writeCVYaml(opfile, VAR, EXPERIENCES, SKILLS, EDUCATION, ACTIVITIES):
     f.write('phone: {}\n'.format(VAR['PHONE']))
     f.write('certification: {}\n'.format(VAR['CERTIFICATION']))
     f.write('website: {}\n'.format(VAR['WEBSITE']))
+    f.write('linkedin: {}\n'.format(VAR['LINKEDIN']))
     f.write('location: {}\n'.format(VAR['LOCATION']))
+    f.write('goal: {}\n'.format(VAR['GOAL']))
     f.write('\n')
 
     f.write('order:\n')
