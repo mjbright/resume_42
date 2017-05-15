@@ -25,10 +25,9 @@ RUN apt-get install -y tree
 
 RUN mkdir /scripts
 ADD scripts/create_cv.sh scripts/csv2yaml.py scripts/cv_tex.py scripts/xsl2csv.py /scripts/
+ADD template/resume-section.tmpl.tex template/resume.tmpl.tex                     /template/
 RUN chmod a+x /scripts/*
 RUN ls -altr /scripts/*
 
 CMD /script/create_cv.sh
-
-
 
