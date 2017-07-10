@@ -23,6 +23,8 @@ if [ ! -z "$1" ];then
     INPUT_XLSX="CV_mine.xlsx"
 fi
 
+which docker || die "No docker on path"
+
 CMD="docker run --rm -it $CHEAT -v $GITDIR:/cv mjbright/cv_resume_42 bash /scripts/create_cv.sh -xl /cv/$INPUT_XLSX"
 
 echo $CMD
