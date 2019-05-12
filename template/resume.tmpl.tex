@@ -36,20 +36,30 @@
 
 \begin{center}
 \huge\bf\color{maincolor} ~{{ name }}~  \\
-\small\color{black} ~{{ title }}~.  \small\color{black} ~{{ location }}~ \\
+\small\color{black} ~{{ title }}~ \\
 \small\color{black} ~{{ goal }}~ \\
+\small\color{black} ~{{ location }}~ \\, \small\color{black} Mobile: ~{{ phone }}~ \\
 \vspace{1.4mm}
-\small\color{black} e-mail: ~{{ email }}~, \small\color{black} mobile: ~{{ phone }}~ \\
-\small\color{black} website: ~{{ website }}~, \\
-\small\color{black} linkedin: ~{{ linkedin }}~ \\
+\small\color{black} E-Mail: ~{{ email }}~ \\
+\small\color{black} LinkedIn: ~{{ linkedin }}~ \\
+\vspace{1.4mm}
+\small\color{black} Website: ~{{ website }}~, \\
+\small\color{black} Conferences: ~{{ talks }}~ \\
 \vspace{1.4mm}
 \small\color{black} Certifications: ~{{ certification }}~
 \end{center}
 \vspace{0.1mm}
 ~{{ body }}~
-\begin{flushright}
-\vspace{0.1mm}
-\small This resume was generated using: https://github.com/mjbright/resume\_42/
-\end{flushright}
+
+%% Force as footnote:
+\vfill
+%% Horizontal rule: see
+%% https://tex.stackexchange.com/questions/19579/horizontal-line-spanning-the-entire-document-in-latex
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+
+%% center:
+\begin{quotation}
+\small Resume generated using: https://github.com/mjbright/resume\_42/ on ~{{ TODAY }}~ at ~{{ NOW }}~ UTC.
+\end{quotation}
 
 \end{document}
