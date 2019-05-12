@@ -1,14 +1,6 @@
 #!/bin/bash
 
-[ "$1" = "-x" ] && { set -x; shift; }
-# set -x
-
-ls -altr /
-
-tree /scripts/
-
-ls -altr /cv/
-tree /cv/
+set -x
 
 #pdflatex=/c/Progs/texlive/2015/bin/win32/pdflatex.exe
 pdflatex=/usr/bin/pdflatex
@@ -35,25 +27,63 @@ die() {
 ########################################
 # Args:
 
+CV_LANG=""
+LANG_PREFIX=""
+
 while [ ! -z "$1" ];do
     case $1 in
+        -x) set -x;;
+
         -xl) shift; MYCV_XL=$1;;
+
+	-lang) shift; CV_LANG=$1; LANG_PREFIX=".${CV_LANG}";;
+
+	*) die "Unknown option <$1>";;
     esac
     shift
 done
 
+CV_BASE=cv${LANG_PREFIX}
+
+DT=$(date +'%G-%m-%d_%Hh%Mm')
+
+mkdir -p /cv/result/dated
+CV_BASE_DT=${CV_BASE}.${DT}
+
+
+# Default: English, values are from Column 'D' of spreadsheet:
+VALUE_COL="D"
+VALUE_COL_NUM="3"
+
+case $CV_LANG in
+    "FR") VALUE_COL="F"; VALUE_COL_NUM="5";;
+
+    "")   VALUE_COL="D"; VALUE_COL_NUM="3";;
+
+    *) die "Unknown language option <$CV_LANG>";;
+esac
+
 ########################################
 # Main:
+
+# set -x
+
+#ls -altr /
+tree /scripts/ 
+
+ls -altr /cv/
+tree -L 2 /cv/
+#tree /cv/ | grep -v results/dated
 
 cd ${0%/*}
 
 CSV=/cv/result/cv.csv
-YAML=/cv/result/cv.yml
+YAML=/cv/result/${CV_BASE}.yml
 
-function run_cmd {
+function RUN {
     CMD="$*"
 
-    echo "[$PWD] $CMD"
+    echo "[$PWD] ---- $CMD"
     $CMD
     res=$?
     #[ $res -ne 0 ] && die "Failed to create csv file"
@@ -64,43 +94,54 @@ function run_cmd {
 [ ! -f $MYCV_XL ] && die "No such Excel file: '$MYCV_XL'"
 
 ## Create CSV file from XL:
-echo; echo "-- Creating csv from xlsx file [$MYCV_XL - Worksheet 'CV']"
-run_cmd "./xsl2csv.py $MYCV_XL CV $CSV"
+echo; echo "-- Creating csv(all columns) from xlsx file [$MYCV_XL - Worksheet 'CV']"
+RUN "./xsl2csv.py $MYCV_XL CV $CSV"
 [ $res -ne 0 ] && die "Failed to create csv file"
 
 ## Create YAML file from CSV:
-echo; echo "-- Creating yaml from csv file"
-run_cmd "./csv2yaml.py $CSV $YAML"
+echo; echo "-- [CV_LANG=$CV_LANG] Creating yaml from csv file [values from col $VALUE_COL (# $VALUE_COL_NUM)]"
+RUN "./csv2yaml.py $CSV $YAML $VALUE_COL_NUM"
+
 ls -altr $CSV $YAML
 [ $res -ne 0 ] && die "Failed to create yaml file"
 
 ## Create LATEX file from YAML:
-echo; echo "-- Creating latex from yaml file"
+echo; echo "-- [CV_LANG=$CV_LANG] Creating latex from yaml file"
 ls -altr /cv/template/
 #ARGS="$YAML /cv/template/resume.tmpl.tex /cv/template/resume-section.tmpl.tex /cv/result/cv.tex"
-ARGS="$YAML resume.tmpl.tex resume-section.tmpl.tex /cv/result/cv.tex"
-ls -altr $ARGS
-run_cmd "./cv_tex.py $ARGS"
-ls -altr /cv/result/cv.tex
+ARGS="$YAML resume.tmpl.tex resume-section.tmpl.tex /cv/result/${CV_BASE}.tex"
+
+#ls -altr $ARGS
+ls -altr /cv/template/resume.tmpl.tex /cv/template/resume-section.tmpl.tex /cv/result/${CV_BASE}.tex
+RUN "./cv_tex.py $ARGS"
+
+echo "AFTER[PWD=$PWD]: RUN './cv_tex.py $ARGS'"
+ls -altr /cv/result/${CV_BASE}.tex
 [ $res -ne 0 ] && die "Failed to create tex file"
 
 ## Create PDF file from LATEX:
-echo; echo "-- Creating pdf from latex file"
+echo; echo "-- [CV_LANG=$CV_LANG] Creating pdf from latex file"
 cd /cv/result
-[ -f ./cv.pdf ] && mv -v ./cv.pdf ./cv.old.pdf
+[ -f ./${CV_BASE}.pdf ] && mv -v ./${CV_BASE}.pdf ./${CV_BASE}.old.pdf
 
-DT=$(date +'%G-%m-%d_%Hh%Mm')
+cp ${CV_BASE}.tex ${CV_BASE_DT}.tex
 
-BASE=cv_${DT}
-cp cv.tex ${BASE}.tex
+#RUN "$pdflatex ${CV_BASE_DT}.pdf"
+RUN "$pdflatex ${CV_BASE_DT}"
+#RUN "$pdflatex ${CV_BASE}"
 
-run_cmd "$pdflatex ${BASE} "
-ls -altr $PWD/${BASE}.pdf
+#echo "AFTER[PWD=$PWD]: RUN '$pdflatex ${CV_BASE}'"
+echo "AFTER[PWD=$PWD]: RUN '$pdflatex ${CV_BASE_DT}'"
+#echo "AFTER[PWD=$PWD]: RUN '$pdflatex ${CV_BASE_DT}.pdf'"
+#echo "AFTER[PWD=$PWD]: RUN '$pdflatex ${CV_BASE_DT}.pdf'"
+ls -altr ./${CV_BASE_DT}.pdf
 [ $res -ne 0 ] && die "Failed to create pdf file"
 
-run_cmd "cp -a $PWD/${BASE}.pdf $PWD/cv.pdf"
-echo "$CMD"
-$CMD
+#RUN "cp -a ./${CV_BASE_DT}.pdf ./${CV_BASE}.pdf"
+RUN "cp -a ./${CV_BASE_DT}.pdf ./${CV_BASE}.pdf"
+RUN "mv    ./${CV_BASE_DT}.* dated/"
+#echo "$CMD"
+#$CMD
 
 
 
