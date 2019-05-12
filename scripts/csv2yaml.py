@@ -8,6 +8,8 @@ import copy
 #csvfile = '2016-02.csv'
 csvfile = sys.argv[1]
 opfile = sys.argv[2]
+value_col = int( sys.argv[3] )
+
 
 def die(msg):
     callingframe = sys._getframe(1)
@@ -112,9 +114,14 @@ def processCsvFile(reader):
             if len(row) > 4:
                 if row[2] != '':
                     varname=row[2]
-                    value=row[3]
+
+                    # value in chosen language:
+                    value=row[value_col]
+
+                    en_value=row[3]
                     fr_value=row[5]
                     es_value=row[7]
+
                     debug("Adding VARIABLE '" +  varname + "'")
                     VAR[varname]=value
                     VAR_fr[varname]=fr_value
@@ -168,6 +175,7 @@ def writeCVYaml(opfile, VAR, EXPERIENCES, SKILLS, EDUCATION, ACTIVITIES):
     f.write('phone: {}\n'.format(VAR['PHONE']))
     f.write('certification: {}\n'.format(VAR['CERTIFICATION']))
     f.write('website: {}\n'.format(VAR['WEBSITE']))
+    f.write('talks: {}\n'.format(VAR['TALKS']))
     f.write('linkedin: {}\n'.format(VAR['LINKEDIN']))
     f.write('location: {}\n'.format(VAR['LOCATION']))
     f.write('goal: {}\n'.format(VAR['GOAL']))
@@ -229,6 +237,10 @@ def writeCVYaml(opfile, VAR, EXPERIENCES, SKILLS, EDUCATION, ACTIVITIES):
             for item in ACTIVITY['LISTITEM']:
                 f.write(LISTITEM_DELIMITER + item + "\n")
         
+
+if (value_col % 2) != 1:
+    print("Expected odd number for value_col, got " + str(value_col))
+    sys.exit(1)
 
 with open(csvfile, 'r') as f:
 
