@@ -57,12 +57,12 @@ def addEntryField(ARRAY, ARRAY_NAME, ENTRY, ALLOWED_FIELDS, row):
         if not 'LISTITEM' in ENTRY:
             ENTRY['LISTITEM'] = [ ]
             
-        ENTRY['LISTITEM'].append(row[3])
-        #debug("Appending LISTITEM <{}>".format(row[3]))
+        ENTRY['LISTITEM'].append(row[value_col])
+        #debug("Appending LISTITEM <{}>".format(row[value_col]))
         #debug("Now LISTITEM has length <{}>".format(len(ENTRY['LISTITEM'])))
         #die("X")
     else:
-        ENTRY[entryField] = row[3]
+        ENTRY[entryField] = row[value_col]
     
 def processCsvFile(reader):
     lno=0
@@ -176,6 +176,7 @@ def writeCVYaml(opfile, VAR, EXPERIENCES, SKILLS, EDUCATION, ACTIVITIES):
     f.write('certification: {}\n'.format(VAR['CERTIFICATION']))
     f.write('website: {}\n'.format(VAR['WEBSITE']))
     f.write('talks: {}\n'.format(VAR['TALKS']))
+    f.write('language: {}\n'.format(VAR['LANGUAGE']))
     f.write('linkedin: {}\n'.format(VAR['LINKEDIN']))
     f.write('location: {}\n'.format(VAR['LOCATION']))
     f.write('goal: {}\n'.format(VAR['GOAL']))
