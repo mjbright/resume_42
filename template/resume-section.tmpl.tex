@@ -50,9 +50,14 @@
     \vspace{0.2mm}
   ~{ endfor }~
   %% \vspace{6mm}
+  %% CRAD: push 'SKILLS' onto new page !!
+    \vfill
+  %%\vspace{80mm}
+  %%\clearpage \newpage \pagebreak
+  %% %additional space
+  %% \vspace{32mm}
   %% \clearpage \newpage \pagebreak
-  %additional space
-  \vspace{32mm}
+  \newpage
 
 ~{ elif name == "RESEARCH EXPERIENCE" }~
   ~{ for research in contents }~
@@ -119,7 +124,7 @@
     } \\
   ~{ endfor }~
   \end{tabular}
-  \clearpage \newpage \pagebreak
+  %% \clearpage \newpage \pagebreak
 
 ~{ elif name == "EDUCATION" }~
   \begin{tabular}{ @{} p{32mm} p{135mm} @{} }
