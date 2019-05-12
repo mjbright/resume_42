@@ -1,7 +1,13 @@
 
 
-GITDIR=$PWD
+#GITDIR=$PWD
+
+# Create WSL compatible address: get physical path, then strip leading /mnt
+GITDIR=$(pwd -P | sed 's?^/mnt??')
 #GITDIR=$HOME/src/git/GIT_mjbright/cv_resume_42
+#echo $GITDIR
+#exit 1
+#GITDIR="/mnt/c/tools/cygwin/home/windo/src/github.com/GIT_mjbright/resume_42/"
 
 CHEAT="-v $GITDIR/scripts:/scripts -v $HOME/:/xlsx_dir"
 CHEAT=""
@@ -28,6 +34,7 @@ which docker || die "No docker on path"
 CMD="docker run --rm -it $CHEAT -v $GITDIR:/cv mjbright/cv_resume_42 bash /scripts/create_cv.sh -xl /cv/$INPUT_XLSX"
 
 echo $CMD
+#exit 1
 $CMD 2>&1 | tee TEST.sh.log
 
 echo "logfile:"
