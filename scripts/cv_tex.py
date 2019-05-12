@@ -11,6 +11,7 @@ import yaml
 import sys
 
 from datetime import date
+from datetime import datetime
 from jinja2 import Environment, FileSystemLoader
 
 THIS_FILE=sys.argv[0]
@@ -47,12 +48,14 @@ def generate():
     phone = yaml_contents['phone'],
     certification = yaml_contents['certification'],
     website = yaml_contents['website'],
+    talks = yaml_contents['talks'],
     goal = yaml_contents['goal'],
     linkedin = yaml_contents['linkedin'],
     location = yaml_contents['location'],
     loc = this_loc, #lines of code in this very script :)
     body = body,
-    today = date.today().strftime("%B %d, %Y") #generation date
+    TODAY = date.today().strftime("%B %d, %Y"), #generation date
+    NOW = datetime.now().strftime("%H:%M") #generation date
   ))
   result.close()
 
